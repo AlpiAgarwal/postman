@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "dd324ac1-0120-4339-8aba-5a3fc0f772ee",
+		"name": "Exavault",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authenticateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "31b59eb0-ffc5-41f9-a496-a35c515885de",
+						"exec": [
+							"const jsondata = pm.response.json();",
+							"pm.collectionVariables.set(\"exavaultAccessToken\", jsondata.results.accessToken);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "primedev-4J11DSRFmaB7P6lQO0E49",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "primedevadmin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "acap1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.exavault.com/v1.2/authenticateUser",
+					"protocol": "https",
+					"host": [
+						"api",
+						"exavault",
+						"com"
+					],
+					"path": [
+						"v1.2",
+						"authenticateUser"
+					]
+				},
+				"description": "Get authenticaton"
+			},
+			"response": []
+		},
+		{
+			"name": "getUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2ace7394-a450-4763-b2ad-ab00560609f4",
+						"exec": [
+							"",
+							"const jsondata = pm.response.json();",
+							"",
+							"pm.collectionVariables.set(\"user_id\", jsondata.results.id);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "primedev-4J11DSRFmaB7P6lQO0E49",
+						"type": "text"
+					},
+					{
+						"key": "access_token",
+						"value": "5ea79e1e64a7aee7c4f238fc8b665b562e9fa0f289f22",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "primeuser-1364",
+							"type": "text"
+						},
+						{
+							"key": "access_token",
+							"value": "5ea6591999e6590efac861bed0804f473818e78589648",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.exavault.com/v1.2/getUser?username=primeuser-1364&access_token={{exavaultAccessToken}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"exavault",
+						"com"
+					],
+					"path": [
+						"v1.2",
+						"getUser"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "primeuser-1364"
+						},
+						{
+							"key": "access_token",
+							"value": "{{exavaultAccessToken}}"
+						}
+					]
+				},
+				"description": "This will userId which is required to update user"
+			},
+			"response": []
+		},
+		{
+			"name": "updateUser",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "primedev-4J11DSRFmaB7P6lQO0E49",
+						"type": "text"
+					},
+					{
+						"key": "access_token",
+						"value": "5ea6591999e6590efac861bed0804f473818e78589648",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "access_token",
+							"value": "{{exavaultAccessToken}}",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "{{user_id}}",
+							"type": "text"
+						},
+						{
+							"key": "destinationFolder",
+							"value": "/primeaccount-79798/import/user",
+							"type": "text"
+						},
+						{
+							"key": "permissions",
+							"value": "upload,download,modify,list",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://api.exavault.com/v1.2/updateUser",
+					"protocol": "https",
+					"host": [
+						"api",
+						"exavault",
+						"com"
+					],
+					"path": [
+						"v1.2",
+						"updateUser"
+					],
+					"query": [
+						{
+							"key": "permissions",
+							"value": "upload,download,modify,list",
+							"disabled": true
+						},
+						{
+							"key": "destinationFolder",
+							"value": "/primeaccount-79798/import/user",
+							"disabled": true
+						},
+						{
+							"key": "userid",
+							"value": "193713",
+							"disabled": true
+						}
+					]
+				},
+				"description": "This will update the user Permissions"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "88b1c58b-10a1-4bba-90ee-7f3b253764d1",
+			"key": "exavaultAccessToken",
+			"value": "5ea7a1b330e7496337c348479b3858fa5411e4318baf6",
+			"type": "string"
+		},
+		{
+			"id": "57f20ead-285b-4b12-b6f4-8f552c59f7f2",
+			"key": "user_id",
+			"value": 193713,
+			"type": "number"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
